@@ -1,8 +1,14 @@
 # Workspace Catch-up
 
-A small, production-minded AI workspace assistant built with **TanStack Start**, **React**, **TypeScript**, **Tailwind CSS**, and **Google Gemini** (via the OpenAI SDK).
+A production-minded AI workspace assistant built with **TanStack Start**, **React**, **TypeScript**, **Tailwind CSS**, and **Google Gemini** (via the OpenAI SDK).
 
 Users can describe what they want to understand or accomplish, select which workspace integrations should provide context, and receive a structured, prioritized AI response.
+
+---
+
+## 🌐 Live Demo
+
+- **Live Application**: [https://workspace-catch-up.vercel.app](https://workspace-catch-up.vercel.app)
 
 ---
 
@@ -22,13 +28,14 @@ Users can describe what they want to understand or accomplish, select which work
 ### 1. Clone & Install Dependencies
 
 ```bash
-cd /Users/seoudy/Work/workspace-catchup
+git clone https://github.com/your-username/workspace-catchup.git
+cd workspace-catchup
 pnpm install
 ```
 
 ### 2. Configure Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file from the provided template:
 
 ```bash
 cp .env.example .env
@@ -37,7 +44,10 @@ cp .env.example .env
 Add your Google Gemini API key to `.env`:
 
 ```env
+# Required: Google Gemini API key
 GEMINI_API_KEY=your_actual_gemini_api_key
+
+# Optional: Override Gemini Model (defaults to gemini-2.5-flash)
 GEMINI_MODEL=gemini-2.5-flash
 ```
 
@@ -49,7 +59,7 @@ GEMINI_MODEL=gemini-2.5-flash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (or the port indicated in your console) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### 4. Run Test Suite
 
@@ -103,12 +113,12 @@ src/
 │   └── about.tsx             # Architecture and security overview
 │
 ├── components/
-│   ├── PromptInput.tsx       # Textarea, character counter, quick suggestions
-│   ├── IntegrationSelector.tsx # Multi-select source cards with badges
+│   ├── CompactComposer.tsx   # Two-column floating composer with multi-select trigger
+│   ├── ContextPopover.tsx    # Flyout popover with badges and context source counts
+│   ├── WorkspaceSidebar.tsx  # Workspace sidebar with active context chips & prompt editor
 │   ├── ResponseCard.tsx      # Executive summary, highlights, and action checklist
-│   ├── Header.tsx            # Sticky navigation with theme toggle & status
-│   ├── Footer.tsx            # Branding & credits
-│   └── ThemeToggle.tsx       # Dark/light mode switcher
+│   ├── Header.tsx            # Sticky navigation with status indicator
+│   └── Footer.tsx            # Branding & credits
 │
 ├── integrations/
 │   ├── types.ts              # Minimal integration interface
