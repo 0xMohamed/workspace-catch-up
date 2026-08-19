@@ -1,7 +1,9 @@
 import OpenAI from 'openai'
 import { catchUpResponseSchema, type CatchUpResponse } from '../lib/schemas'
 
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash'
+export function getAiModel(): string {
+  return process.env.GEMINI_MODEL || 'gemini-2.5-flash'
+}
 
 export function getAiClient(): OpenAI {
   const apiKey = process.env.GEMINI_API_KEY
@@ -22,11 +24,12 @@ export async function callGeminiCatchUp(
   userPrompt: string
 ): Promise<CatchUpResponse> {
   const client = getAiClient()
+  const model = getAiModel()
 
   let rawContent = ''
   try {
     const response = await client.chat.completions.create({
-      model: DEFAULT_MODEL,
+      model,
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
